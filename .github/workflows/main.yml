@@ -11,10 +11,10 @@ jobs:
       - name: Setup Theos and SDK
         run: |
           git clone --recursive https://github.com/theos/theos.git ~/theos
-          # دابەزاندنا SDK ژ لینکەکێ باوەرپێکری و قایم
-          curl -LO https://github.com/theos/sdks/raw/master/iPhoneOS13.0.sdk.tar.xz
           mkdir -p ~/theos/sdks
-          tar -xvf iPhoneOS13.0.sdk.tar.xz -C ~/theos/sdks
+          # دابەزاندنا SDK ب ڕێکەکا جودا دا کێشە چێ نەبیت
+          curl -L https://github.com/theos/sdks/raw/master/iPhoneOS14.5.sdk.tar.xz -o ~/theos/sdks/iPhoneOS14.5.sdk.tar.xz
+          cd ~/theos/sdks && tar -xf iPhoneOS14.5.sdk.tar.xz
           echo "THEOS=~/theos" >> $GITHUB_ENV
           echo "~/theos/bin" >> $GITHUB_PATH
 
@@ -25,5 +25,5 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: WelcomeTweak-Final-DEB
+          name: WelcomeTweak-Package
           path: packages/*.deb
